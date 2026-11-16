@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<string.h>
-#define MAX 3
+#define MAX 50
 
 struct movie{
 	char title[50];
@@ -16,15 +16,15 @@ void addMovie(struct movie m[], int *count){
 		return;
 	}
 	printf("Enter movie title:\n");
-	scanf("%[^\n]", m[*count].title);
+	scanf(" %[^\n]", m[*count].title);
 	printf("Enter movie genre:\n");
-	scanf("%[^\n]", m[*count].genre);
+	scanf(" %[^\n]", m[*count].genre);
 	printf("Enter Director:\n");
-	scanf("%[^\n]", m[*count].director);
+	scanf(" %[^\n]", m[*count].director);
 	printf("Enter Release Year:\n");
 	scanf("%d", &m[*count].year);
 	printf("Enter Rating:\n");
-	scanf("%d", &m[*count].rating);
+	scanf("%f", &m[*count].rating);
 	
 	(*count)++;
 	printf("Movie added successfully.\n");
@@ -35,22 +35,23 @@ void searchByGenre(struct movie m[], int count){
 	int found=0, i;
 	
 	printf("Search Genre:\n");
-	scanf("%[^\n]", searchGenre);
+	scanf(" %[^\n]", searchGenre);
 	
 	for(i=0;i<count;i++){
 		if(strcmp(m[i].genre, searchGenre)==0){
 			printf("Title:%s | Director:%s | Year:%d | Rating:%.1f\n", m[i].title, m[i].director, m[i].year, m[i].rating);
 			found=1;
 		}
-		if(found==0){
-			printf("No movies of this genre.\n");
-		}
+	}
+	if(found==0){
+		printf("No movies of this genre.\n");
 	}
 }
 
 void displayMovies(struct movie m[], int count){
-	for(int i=0;i<count;i++){
-		printf("Title:%s | Director:%s | Year:%d | Rating:%.1f\n", m[i].title, m[i].director, m[i].year, m[i].rating);
+	int i;
+	for(i=0;i<count;i++){
+		printf("Title:%s | Genre:%s | Director:%s | Year:%d | Rating:%.1f\n", m[i].title, m[i].genre, m[i].director, m[i].year, m[i].rating);
 	}
 }
 
